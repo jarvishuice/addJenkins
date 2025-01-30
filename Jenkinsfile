@@ -4,29 +4,28 @@ pipeline {
     stages {
         stage('Preparar Entorno') {
             steps {
-                sh 'python -m pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
+                bat 'python -m pip install --upgrade pip'
+                bat 'pip install -r requirements.txt'
             }
         }
         
         stage('Ejecutar Pruebas') {
             steps {
-                sh 'python -m pytest tests/'
+                bat 'python -m pytest tests/'
             }
         }
         
         stage('Construir') {
             steps {
-                sh 'echo "Construcción completada"'
+                bat 'echo "Construcción completada"'
             }
         }
         
         stage('Desplegar') {
             steps {
-                sh '''
+                bat '''
                     echo "Iniciando despliegue..."
-                    # Aquí puedes agregar comandos para desplegar tu aplicación
-                    # Por ejemplo: reiniciar el servicio uvicorn
+                    rem Aquí tus comandos de despliegue para Windows
                 '''
             }
         }
@@ -34,10 +33,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline ejecutado exitosamente!'
+            bat 'echo "Pipeline ejecutado exitosamente!"'
         }
         failure {
-            echo 'El pipeline ha fallado'
+            bat 'echo "El pipeline ha fallado"'
         }
     }
 }
